@@ -3,6 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
 	"time"
 )
@@ -15,24 +17,25 @@ func main() {
 
 	//https://dutchie.com/dispensary/panacea-wellness-quincy/products/flower
 	fmt.Printf("Panacea Wellness Quincy\n")
-	getProduct("https://dutchie.com/graphql?operationName=FilteredProducts&variables=%7B%22includeEnterpriseSpecials%22%3Afalse%2C%22includeCannabinoids%22%3Atrue%2C%22productsFilter%22%3A%7B%22dispensaryId%22%3A%2263fe436c9cab490070c0f32d%22%2C%22pricingType%22%3A%22med%22%2C%22strainTypes%22%3A%5B%5D%2C%22subcategories%22%3A%5B%5D%2C%22Status%22%3A%22Active%22%2C%22types%22%3A%5B%22Flower%22%5D%2C%22useCache%22%3Afalse%2C%22sortDirection%22%3A1%2C%22sortBy%22%3Anull%2C%22isDefaultSort%22%3Atrue%2C%22bypassOnlineThresholds%22%3Afalse%2C%22isKioskMenu%22%3Afalse%2C%22removeProductsBelowOptionThresholds%22%3Atrue%7D%2C%22page%22%3A0%2C%22perPage%22%3A100%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%220e884328c01ef8ed540d4bbd27101ee58fedaf5cddda6c499169209b53fdf574%22%7D%7D")
+	printProduct("https://dutchie.com/graphql?operationName=FilteredProducts&variables=%7B%22includeEnterpriseSpecials%22%3Afalse%2C%22includeCannabinoids%22%3Atrue%2C%22productsFilter%22%3A%7B%22dispensaryId%22%3A%2263fe436c9cab490070c0f32d%22%2C%22pricingType%22%3A%22med%22%2C%22strainTypes%22%3A%5B%5D%2C%22subcategories%22%3A%5B%5D%2C%22Status%22%3A%22Active%22%2C%22types%22%3A%5B%22Flower%22%5D%2C%22useCache%22%3Afalse%2C%22sortDirection%22%3A1%2C%22sortBy%22%3Anull%2C%22isDefaultSort%22%3Atrue%2C%22bypassOnlineThresholds%22%3Afalse%2C%22isKioskMenu%22%3Afalse%2C%22removeProductsBelowOptionThresholds%22%3Atrue%7D%2C%22page%22%3A0%2C%22perPage%22%3A100%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%220e884328c01ef8ed540d4bbd27101ee58fedaf5cddda6c499169209b53fdf574%22%7D%7D")
 
 	//https://dutchie.com/dispensary/commonwealth-alternative-care-brockton-rec/products/flower
-	fmt.Printf("Panacea Wellness Quincy\n")
-	getProduct("https://dutchie.com/graphql?operationName=FilteredProducts&variables=%7B%22includeEnterpriseSpecials%22%3Afalse%2C%22includeCannabinoids%22%3Atrue%2C%22productsFilter%22%3A%7B%22dispensaryId%22%3A%226196936e56927100a51e6ede%22%2C%22pricingType%22%3A%22rec%22%2C%22strainTypes%22%3A%5B%5D%2C%22subcategories%22%3A%5B%5D%2C%22Status%22%3A%22Active%22%2C%22types%22%3A%5B%22Flower%22%5D%2C%22useCache%22%3Afalse%2C%22sortDirection%22%3A1%2C%22sortBy%22%3Anull%2C%22isDefaultSort%22%3Atrue%2C%22bypassOnlineThresholds%22%3Afalse%2C%22isKioskMenu%22%3Afalse%2C%22removeProductsBelowOptionThresholds%22%3Atrue%7D%2C%22page%22%3A0%2C%22perPage%22%3A100%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%220e884328c01ef8ed540d4bbd27101ee58fedaf5cddda6c499169209b53fdf574%22%7D%7D")
+	fmt.Printf("commonwealth-alternative-care-brockton-rec\n")
+	printProduct("https://dutchie.com/graphql?operationName=FilteredProducts&variables=%7B%22includeEnterpriseSpecials%22%3Afalse%2C%22includeCannabinoids%22%3Atrue%2C%22productsFilter%22%3A%7B%22dispensaryId%22%3A%226196936e56927100a51e6ede%22%2C%22pricingType%22%3A%22rec%22%2C%22strainTypes%22%3A%5B%5D%2C%22subcategories%22%3A%5B%5D%2C%22Status%22%3A%22Active%22%2C%22types%22%3A%5B%22Flower%22%5D%2C%22useCache%22%3Afalse%2C%22sortDirection%22%3A1%2C%22sortBy%22%3Anull%2C%22isDefaultSort%22%3Atrue%2C%22bypassOnlineThresholds%22%3Afalse%2C%22isKioskMenu%22%3Afalse%2C%22removeProductsBelowOptionThresholds%22%3Atrue%7D%2C%22page%22%3A0%2C%22perPage%22%3A100%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%220e884328c01ef8ed540d4bbd27101ee58fedaf5cddda6c499169209b53fdf574%22%7D%7D")
 
 	//https://dutchie.com/dispensary/legal-greens-brockton/products/flower
 	fmt.Printf("Legal Greens (Brockton)\n")
-	getProduct("https://dutchie.com/graphql?operationName=FilteredProducts&variables=%7B%22includeEnterpriseSpecials%22%3Afalse%2C%22includeCannabinoids%22%3Atrue%2C%22productsFilter%22%3A%7B%22dispensaryId%22%3A%22605d194989577500ba7990a4%22%2C%22pricingType%22%3A%22rec%22%2C%22strainTypes%22%3A%5B%5D%2C%22subcategories%22%3A%5B%5D%2C%22Status%22%3A%22Active%22%2C%22types%22%3A%5B%22Flower%22%5D%2C%22useCache%22%3Afalse%2C%22sortDirection%22%3A1%2C%22sortBy%22%3A%22price%22%2C%22isDefaultSort%22%3Atrue%2C%22bypassOnlineThresholds%22%3Afalse%2C%22isKioskMenu%22%3Afalse%2C%22removeProductsBelowOptionThresholds%22%3Atrue%7D%2C%22page%22%3A0%2C%22perPage%22%3A100%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%220e884328c01ef8ed540d4bbd27101ee58fedaf5cddda6c499169209b53fdf574%22%7D%7D")
+	printProduct("https://dutchie.com/graphql?operationName=FilteredProducts&variables=%7B%22includeEnterpriseSpecials%22%3Afalse%2C%22includeCannabinoids%22%3Atrue%2C%22productsFilter%22%3A%7B%22dispensaryId%22%3A%22605d194989577500ba7990a4%22%2C%22pricingType%22%3A%22rec%22%2C%22strainTypes%22%3A%5B%5D%2C%22subcategories%22%3A%5B%5D%2C%22Status%22%3A%22Active%22%2C%22types%22%3A%5B%22Flower%22%5D%2C%22useCache%22%3Afalse%2C%22sortDirection%22%3A1%2C%22sortBy%22%3A%22price%22%2C%22isDefaultSort%22%3Atrue%2C%22bypassOnlineThresholds%22%3Afalse%2C%22isKioskMenu%22%3Afalse%2C%22removeProductsBelowOptionThresholds%22%3Atrue%7D%2C%22page%22%3A0%2C%22perPage%22%3A100%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%220e884328c01ef8ed540d4bbd27101ee58fedaf5cddda6c499169209b53fdf574%22%7D%7D")
 
 	//https://dutchie.com/dispensary/in-good-health-medical/products/flower
 	fmt.Printf("In Good Health - Medical\n")
-	getProduct("https://dutchie.com/graphql?operationName=FilteredProducts&variables=%7B%22includeEnterpriseSpecials%22%3Afalse%2C%22includeCannabinoids%22%3Atrue%2C%22productsFilter%22%3A%7B%22dispensaryId%22%3A%2260ae731c6fc0b200b5fc3199%22%2C%22pricingType%22%3A%22med%22%2C%22strainTypes%22%3A%5B%5D%2C%22subcategories%22%3A%5B%5D%2C%22Status%22%3A%22Active%22%2C%22types%22%3A%5B%22Flower%22%5D%2C%22useCache%22%3Afalse%2C%22sortDirection%22%3A1%2C%22sortBy%22%3Anull%2C%22isDefaultSort%22%3Atrue%2C%22bypassOnlineThresholds%22%3Afalse%2C%22isKioskMenu%22%3Afalse%2C%22removeProductsBelowOptionThresholds%22%3Atrue%7D%2C%22page%22%3A0%2C%22perPage%22%3A100%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%220e884328c01ef8ed540d4bbd27101ee58fedaf5cddda6c499169209b53fdf574%22%7D%7D")
+	printProduct("https://dutchie.com/graphql?operationName=FilteredProducts&variables=%7B%22includeEnterpriseSpecials%22%3Afalse%2C%22includeCannabinoids%22%3Atrue%2C%22productsFilter%22%3A%7B%22dispensaryId%22%3A%2260ae731c6fc0b200b5fc3199%22%2C%22pricingType%22%3A%22med%22%2C%22strainTypes%22%3A%5B%5D%2C%22subcategories%22%3A%5B%5D%2C%22Status%22%3A%22Active%22%2C%22types%22%3A%5B%22Flower%22%5D%2C%22useCache%22%3Afalse%2C%22sortDirection%22%3A1%2C%22sortBy%22%3Anull%2C%22isDefaultSort%22%3Atrue%2C%22bypassOnlineThresholds%22%3Afalse%2C%22isKioskMenu%22%3Afalse%2C%22removeProductsBelowOptionThresholds%22%3Atrue%7D%2C%22page%22%3A0%2C%22perPage%22%3A100%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%220e884328c01ef8ed540d4bbd27101ee58fedaf5cddda6c499169209b53fdf574%22%7D%7D")
 
 	//https://dutchie.com/dispensary/atlantic-medicinal-partners-inc1/products/flower
 	fmt.Printf("Atlantic Medicinal Partners - Brockton")
-	getProduct("https://dutchie.com/graphql?operationName=FilteredProducts&variables=%7B%22includeEnterpriseSpecials%22%3Afalse%2C%22includeCannabinoids%22%3Atrue%2C%22productsFilter%22%3A%7B%22dispensaryId%22%3A%2261a93ae4b7cb5900a1cb4281%22%2C%22pricingType%22%3A%22rec%22%2C%22strainTypes%22%3A%5B%5D%2C%22subcategories%22%3A%5B%5D%2C%22Status%22%3A%22Active%22%2C%22types%22%3A%5B%22Flower%22%5D%2C%22useCache%22%3Afalse%2C%22sortDirection%22%3A1%2C%22sortBy%22%3A%22weight%22%2C%22isDefaultSort%22%3Atrue%2C%22bypassOnlineThresholds%22%3Afalse%2C%22isKioskMenu%22%3Afalse%2C%22removeProductsBelowOptionThresholds%22%3Atrue%7D%2C%22page%22%3A0%2C%22perPage%22%3A100%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%220e884328c01ef8ed540d4bbd27101ee58fedaf5cddda6c499169209b53fdf574%22%7D%7D")
+	printProduct("https://dutchie.com/graphql?operationName=FilteredProducts&variables=%7B%22includeEnterpriseSpecials%22%3Afalse%2C%22includeCannabinoids%22%3Atrue%2C%22productsFilter%22%3A%7B%22dispensaryId%22%3A%2261a93ae4b7cb5900a1cb4281%22%2C%22pricingType%22%3A%22rec%22%2C%22strainTypes%22%3A%5B%5D%2C%22subcategories%22%3A%5B%5D%2C%22Status%22%3A%22Active%22%2C%22types%22%3A%5B%22Flower%22%5D%2C%22useCache%22%3Afalse%2C%22sortDirection%22%3A1%2C%22sortBy%22%3A%22weight%22%2C%22isDefaultSort%22%3Atrue%2C%22bypassOnlineThresholds%22%3Afalse%2C%22isKioskMenu%22%3Afalse%2C%22removeProductsBelowOptionThresholds%22%3Atrue%7D%2C%22page%22%3A0%2C%22perPage%22%3A100%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%220e884328c01ef8ed540d4bbd27101ee58fedaf5cddda6c499169209b53fdf574%22%7D%7D")
 
+	saveJsontoFile("In Good Health - Medical", "https://dutchie.com/graphql?operationName=FilteredProducts&variables=%7B%22includeEnterpriseSpecials%22%3Afalse%2C%22includeCannabinoids%22%3Atrue%2C%22productsFilter%22%3A%7B%22dispensaryId%22%3A%2260ae731c6fc0b200b5fc3199%22%2C%22pricingType%22%3A%22med%22%2C%22strainTypes%22%3A%5B%5D%2C%22subcategories%22%3A%5B%5D%2C%22Status%22%3A%22Active%22%2C%22types%22%3A%5B%22Flower%22%5D%2C%22useCache%22%3Afalse%2C%22sortDirection%22%3A1%2C%22sortBy%22%3Anull%2C%22isDefaultSort%22%3Atrue%2C%22bypassOnlineThresholds%22%3Afalse%2C%22isKioskMenu%22%3Afalse%2C%22removeProductsBelowOptionThresholds%22%3Atrue%7D%2C%22page%22%3A0%2C%22perPage%22%3A100%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%220e884328c01ef8ed540d4bbd27101ee58fedaf5cddda6c499169209b53fdf574%22%7D%7D")
 }
 
 type productData struct {
@@ -65,7 +68,7 @@ type flowerProducts struct {
 	ProductName         string       `json:"Name"`
 	NonArmsLength       string       `json:"nonArmsLength"`
 	WeightOptions       []string     `json:"Options"`
-	CustomerLimit       bool         `json:"limitsPerCustomer"`
+	CustomerLimit       int          `json:"limitsPerCustomer"`
 	ManualInventory     string       `json:"manualInventory"`
 	POSMetaData         MetaData     `json:"POSMetaData"`
 	Price               []float64    `json:"Prices"`
@@ -169,32 +172,6 @@ type WeightEquivalent struct {
 	TypeName string  `json:"__typename"`
 }
 
-func getProduct(url string) {
-
-	var product productData
-
-	err := getJson(url, &product)
-
-	if err != nil {
-
-		fmt.Printf("%s\n ", err.Error())
-	} else {
-
-		fmt.Printf("BrandName: %s\n FlowerProducts: %s\n THC: %d\n Price: %d\n Avaliable Inventory: %s\n",
-			product.Data.FilteredProducts.Products[0].BrandName,
-			product.Data.FilteredProducts.Products[0].ProductName,
-			product.Data.FilteredProducts.Products[0].THCContent.Range,
-			product.Data.FilteredProducts.Products[0].Price,
-			product.Data.FilteredProducts.Products[0].POSMetaData.Children[0].InventoryQuantityAvailable,
-
-			//product.Data.FilteredProducts.Products[0].POSMetaData.Children[0].InventoryQuantityAvailable,
-			//product.Data.FilteredProducts.Products[15].Price,
-			//product.Data.FilteredProducts.Products[5].BrandName,
-		)
-	}
-
-}
-
 func getJson(url string, target interface{}) error {
 	resp, err := client.Get(url)
 
@@ -205,5 +182,65 @@ func getJson(url string, target interface{}) error {
 	defer resp.Body.Close()
 
 	return json.NewDecoder(resp.Body).Decode(target)
+
+}
+
+func getProduct(url string) productData {
+
+	var product productData
+
+	err := getJson(url, &product)
+
+	if err != nil {
+
+		fmt.Printf("%s\n ", err.Error())
+	} else {
+
+		/*
+			fmt.Printf("BrandName: %s\n FlowerProducts: %s\n THC: %d\n Price: %d\n Avaliable Inventory: %s\n",
+				product.Data.FilteredProducts.Products[0].ProductName,
+				product.Data.FilteredProducts.Products[0].THCContent.Range,
+				product.Data.FilteredProducts.Products[0].Price,
+				product.Data.FilteredProducts.Products[0].POSMetaData.Children[0].InventoryQuantityAvailable,
+
+				//product.Data.FilteredProducts.Products[0].POSMetaData.Children[0].InventoryQuantityAvailable,
+				//product.Data.FilteredProducts.Products[15].Price,
+				//product.Data.FilteredProducts.Products[5].BrandName,
+			)
+
+		*/
+	}
+	return product
+
+}
+
+func saveJsontoFile(filename string, link string) {
+
+	jsonMarshal, _ := json.Marshal(getProduct(link))
+	jsonString := string(jsonMarshal)
+
+	err := ioutil.WriteFile(filename, []byte(jsonString), 066)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+}
+
+func printProduct(url string) {
+
+	product := getProduct(url)
+
+	fmt.Printf("Name: %d\n THC: %d\n Price: %s\n Avaliable: %d\n Feautred; %d\n CustomerLimit: %d\n",
+		product.Data.FilteredProducts.Products[0].ProductName,
+		product.Data.FilteredProducts.Products[0].THCContent.Range,
+		product.Data.FilteredProducts.Products[0].Price,
+		product.Data.FilteredProducts.Products[0].POSMetaData.Children[0].InventoryQuantityAvailable,
+		product.Data.FilteredProducts.Products[0].Featured,
+		product.Data.FilteredProducts.Products[0].CustomerLimit,
+
+		//product.Data.FilteredProducts.Products[0].POSMetaData.Children[0].InventoryQuantityAvailable,
+		//product.Data.FilteredProducts.Products[15].Price,
+		//product.Data.FilteredProducts.Products[5].BrandName,
+	)
 
 }
