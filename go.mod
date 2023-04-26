@@ -1,0 +1,3 @@
+module Cannabis_Application_Programming_Interface
+
+go 1.20
