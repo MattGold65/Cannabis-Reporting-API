@@ -230,13 +230,14 @@ func printProduct(url string) {
 
 	product := getProduct(url)
 
-	fmt.Printf("Name: %d\n THC: %d\n Price: %s\n Avaliable: %d\n Feautred; %d\n CustomerLimit: %d\n",
-		product.Data.FilteredProducts.Products[0].ProductName,
-		product.Data.FilteredProducts.Products[0].THCContent.Range,
-		product.Data.FilteredProducts.Products[0].Price,
-		product.Data.FilteredProducts.Products[0].POSMetaData.Children[0].InventoryQuantityAvailable,
-		product.Data.FilteredProducts.Products[0].Featured,
-		product.Data.FilteredProducts.Products[0].CustomerLimit,
+	fmt.Printf("Name: %d\n THC: %d\n Price: %s\n DiscountedPrice: %d\n Avaliable: %d\n Feautred; %d\n CustomerLimit: %d\n",
+		product.Data.FilteredProducts.Products[3].ProductName,
+		product.Data.FilteredProducts.Products[3].THCContent.Range,
+		product.Data.FilteredProducts.Products[3].Price,
+		product.Data.FilteredProducts.Products[3].RecSpecialPrice,
+		product.Data.FilteredProducts.Products[3].POSMetaData.Children[0].InventoryQuantityAvailable,
+		product.Data.FilteredProducts.Products[3].Featured,
+		product.Data.FilteredProducts.Products[3].CustomerLimit,
 
 		//product.Data.FilteredProducts.Products[0].POSMetaData.Children[0].InventoryQuantityAvailable,
 		//product.Data.FilteredProducts.Products[15].Price,
