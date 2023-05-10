@@ -16,6 +16,8 @@ import (
 
 var testflower ProductData
 
+var testflower2 ProductData
+
 func TestProductIDs(t *testing.T) {
 
 	// Set the directory path
@@ -53,6 +55,14 @@ func TestProductIDs(t *testing.T) {
 				fmt.Errorf("Decoding Error with the json file: " + file.Name())
 				log.Fatal(err)
 			}
+
+			//perform check here if testflower2 is not empty
+
+			//assign testflower to be equal to testflower2
+			//testflower will be overridden by next file
+			testflower2 = testflower
+			fmt.Println(testflower2)
+
 		}
 
 	}
