@@ -13,33 +13,33 @@ type Product struct {
 }
 
 type flowerProducts struct {
-	Id                  string       `json:"_id"`
-	BrandName           string       `json:"brandName"`
-	CBD                 string       `json:"CBD"`
-	CBDContent          CBDContent   `json:"CBDContent"`
-	ComingSoon          string       `json:"comingSoon"`
-	CreatedAt           string       `json:"createdAt"`
-	DispensaryID        string       `json:"DispensaryID"`
-	EnterpriseProductId string       `json:"enterpriseProductId"`
-	Image               string       `json:"Image"`
-	Measurements        measurements `json:"measurements"`
-	MedicalOnly         bool         `json:"medicalOnly"`
-	MedicalPrice        []float64    `json:"medicalPrices"`
-	MedicalSpecialPrice []float64    `json:"medicalSpecialPrices"`
-	WholeSalePrice      []float64    `json:"wholesalePrices"`
-	ProductName         string       `json:"Name"`
-	NonArmsLength       string       `json:"nonArmsLength"`
-	WeightOptions       []string     `json:"Options"`
-	CustomerLimit       string       `json:"limitsPerCustomer"`
-	ManualInventory     string       `json:"manualInventory"`
-	POSMetaData         MetaData     `json:"POSMetaData"`
-	Price               []float64    `json:"Prices"`
-	//PricingTierData     string     `json:"pricingTierData"`
-	RecOnly         bool      `json:"recOnly"`
-	RecPrice        []float64 `json:"recPrices"`
-	RecSpecialPrice []float64 `json:"recSpecialPrices"`
-	Special         bool      `json:"special"`
-	//SpecialData                []string     `json:"specialData"`
+	Id                         string                `json:"_id"`
+	BrandName                  string                `json:"brandName"`
+	CBD                        string                `json:"CBD"`
+	CBDContent                 CBDContent            `json:"CBDContent"`
+	ComingSoon                 string                `json:"comingSoon"`
+	CreatedAt                  string                `json:"createdAt"`
+	DispensaryID               string                `json:"DispensaryID"`
+	EnterpriseProductId        string                `json:"enterpriseProductId"`
+	Image                      string                `json:"Image"`
+	Measurements               measurements          `json:"measurements"`
+	MedicalOnly                bool                  `json:"medicalOnly"`
+	MedicalPrice               []float64             `json:"medicalPrices"`
+	MedicalSpecialPrice        []float64             `json:"medicalSpecialPrices"`
+	WholeSalePrice             []float64             `json:"wholesalePrices"`
+	ProductName                string                `json:"Name"`
+	NonArmsLength              string                `json:"nonArmsLength"`
+	WeightOptions              []string              `json:"Options"`
+	CustomerLimit              string                `json:"limitsPerCustomer"`
+	ManualInventory            string                `json:"manualInventory"`
+	POSMetaData                MetaData              `json:"POSMetaData"`
+	Price                      []float64             `json:"Prices"`
+	PricingTierData            string                `json:"pricingTierData"`
+	RecOnly                    bool                  `json:"recOnly"`
+	RecPrice                   []float64             `json:"recPrices"`
+	RecSpecialPrice            []float64             `json:"recSpecialPrices"`
+	Special                    bool                  `json:"special"`
+	SpecialData                []string              `json:"specialData"`
 	Status                     string                `json:"Status"`
 	StrainType                 string                `json:"strainType"`
 	SubCategory                string                `json:"subCategory"`

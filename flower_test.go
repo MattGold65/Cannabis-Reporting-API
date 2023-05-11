@@ -17,6 +17,8 @@ import (
 var testflower ProductData
 
 var testflower2 ProductData
+var j int
+var totalsCRAPPED int
 
 func TestProductIDs(t *testing.T) {
 
@@ -38,8 +40,8 @@ func TestProductIDs(t *testing.T) {
 			filePath := filepath.Join(dirPath, file.Name())
 			f, err := os.Open(filePath)
 			if err != nil {
+				t.Errorf("There was an issue opening the file: " + file.Name())
 				t.Fail()
-				fmt.Errorf("There was an issue opening the file: " + file.Name())
 				log.Fatal(err)
 			}
 
@@ -51,19 +53,40 @@ func TestProductIDs(t *testing.T) {
 			err = json.NewDecoder(f).Decode(&testflower)
 
 			if err != nil {
+				t.Errorf("Decoding Error with the json file: " + file.Name())
+				t.Log(err)
 				t.Fail()
-				fmt.Errorf("Decoding Error with the json file: " + file.Name())
-				log.Fatal(err)
 			}
+			var k int
+			k = 0
+			for i := range testflower.Data.FilteredProducts.Products {
+				Brand := testflower.Data.FilteredProducts.Products[i].BrandName
+				Name := testflower.Data.FilteredProducts.Products[i].ProductName
+				Special := testflower.Data.FilteredProducts.Products[i].SpecialData
+				PriceTier := testflower.Data.FilteredProducts.Products[i].PricingTierData
+				fmt.Println(Brand)
+				fmt.Println(Name)
+				fmt.Println(PriceTier)
+				fmt.Println(Special)
+
+				k = k + 1
+
+				if err != nil {
+					t.Fail()
+				}
+
+			}
+			fmt.Printf("The total count is: %d \n", k)
 
 			//perform check here if testflower2 is not empty
 
 			//assign testflower to be equal to testflower2
 			//testflower will be overridden by next file
-			testflower2 = testflower
-			fmt.Println(testflower2)
+			//testflower2 = testflower
+			//fmt.Println(testflower2)
 
 		}
 
 	}
+
 }
