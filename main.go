@@ -28,6 +28,38 @@ var CannapiDispensary ProductData
 var BrocktonGreenHeart ProductData
 var GTEBrocktonLLCdbaBoteraBrockton ProductData
 var BudsGoodsProvisionsAbington ProductData
+var CannaVana ProductData
+var NativeSunNorthAttleboro ProductData
+var Yamba ProductData
+var BudsGoodsProvisionsWatertown ProductData
+var SiraNaturalsSomervilleMedical ProductData
+var MistyMountainShopMalden ProductData
+var GardenRemediesRecMelrose ProductData
+var GardenRemediesMedMelrose ProductData
+var OldeWorldRemedies ProductData
+var NaturesMedicinesFallRiver ProductData
+var GoodChemistryLynn ProductData
+var DiemLynn ProductData
+var LocalCannabisCoSwampscott ProductData
+var NewLeafFallRiver ProductData
+var INSAIncSalemAdultUse ProductData
+var InsaAvon ProductData
+var RhelmCannabis ProductData
+var TheoryWellnessBostonAreaDelivery ProductData
+var TheoryWellnessBridgewater ProductData
+var AlternativeCompassionServices ProductData
+var HealthCircle ProductData
+var GreenRockCannabis ProductData
+var ReleafAlternatives ProductData
+var ErmontInc ProductData
+var GreatestHitsCannabisTaunton ProductData
+var CuraleafMAHanover ProductData
+var PanaceaWellnessRec ProductData
+var PanaceaWellness ProductData
+var QuincyCannabisCo ProductData
+var CommonwealthAlternativeCareTauntonMed ProductData
+var CommonwealthAlternativeCareTauntonRec ProductData
+var TERPSAttleboro ProductData
 
 func main() {
 	client = &http.Client{Timeout: 10 * time.Second}
@@ -37,12 +69,43 @@ func main() {
 	err = getJson(AtlanticMedicinalPartnersBrocktonRecLink, "AtlanticMedicinalPartners", &AtlanticMedicinalPartners)
 	err = getJson(InGoodHealthMedicalLink, "InGoodHealthMedical", &InGoodHealthMedical)
 	err = getJson(PanaceaWellnessQuincyLink, "PanaceaWellnessQuincy", &PanaceaWellnessQuincy)
-
 	err = getJson(CommonwealthAlternativeCareBrocktonMedLink, "CommonwealthAlternativeCareBrocktonMed", &CommonwealthAlternativeCareBrocktonMed)
 	err = getJson(CannapiDispensaryLink, "CannapiDispensary", &CannapiDispensary)
 	err = getJson(BrocktonGreenHeartLink, "BrocktonGreenHeart", &BrocktonGreenHeart)
 	err = getJson(GTEBrocktonLLCdbaBoteraBrocktonLink, "GTEBrocktonLLCdbaBoteraBrockton", &GTEBrocktonLLCdbaBoteraBrockton)
 	err = getJson(BudsGoodsProvisionsAbingtonLink, "BudsGoodsProvisionsAbington", &BudsGoodsProvisionsAbington)
+	err = getJson(CannaVanaLink, "CannaVana", &CannaVana)
+	err = getJson(NativeSunNorthAttleboroLink, "NativeSunNorthAttleboro", &NativeSunNorthAttleboro)
+	err = getJson(YambaLink, "Yamba", &Yamba)
+	err = getJson(BudsGoodsProvisionsWatertownLink, "BudsGoodsProvisionsWatertown", &BudsGoodsProvisionsWatertown)
+	err = getJson(SiraNaturalsSomervilleMedicalLink, "SiraNaturalsSomervilleMedical", &SiraNaturalsSomervilleMedical)
+	err = getJson(MistyMountainShopMaldenLink, "MistyMountainShopMalden", &MistyMountainShopMalden)
+	err = getJson(GardenRemediesRecMelroseLink, "GardenRemediesRecMelrose", &GardenRemediesRecMelrose)
+	err = getJson(GardenRemediesMedMelroseLink, "GardenRemediesMedMelrose", &GardenRemediesMedMelrose)
+	err = getJson(OldeWorldRemediesLink, "OldeWorldRemedies", &OldeWorldRemedies)
+	err = getJson(NaturesMedicinesFallRiverLink, "NaturesMedicinesFallRiver", &NaturesMedicinesFallRiver)
+	err = getJson(GoodChemistryLynnLink, "GoodChemistryLynn", &GoodChemistryLynn)
+	err = getJson(DiemLynnLink, "DiemLynn", &DiemLynn)
+	err = getJson(LocalCannabisCoSwampscottLink, "LocalCannabisCoSwampscott", &LocalCannabisCoSwampscott)
+	err = getJson(NewLeafFallRiverLink, "NewLeafFallRiver", &NewLeafFallRiver)
+	err = getJson(INSAIncSalemAdultUseLink, "INSAIncSalemAdultUse", &INSAIncSalemAdultUse)
+	err = getJson(InsaAvonLink, "InsaAvon", &InsaAvon)
+	err = getJson(RhelmCannabisLink, "RhelmCannabis", &RhelmCannabis)
+	err = getJson(TheoryWellnessBostonAreaDeliveryLink, "TheoryWellnessBostonAreaDelivery", &TheoryWellnessBostonAreaDelivery)
+	err = getJson(TheoryWellnessBridgewaterLink, "TheoryWellnessBridgewater", &TheoryWellnessBridgewater)
+	err = getJson(AlternativeCompassionServicesLink, "AlternativeCompassionServices", &AlternativeCompassionServices)
+	err = getJson(HealthCircleLink, "HealthCircle", &HealthCircle)
+	err = getJson(GreenRockCannabisLink, "GreenRockCannabis", &GreenRockCannabis)
+	err = getJson(ReleafAlternativesLink, "ReleafAlternatives", &ReleafAlternatives)
+	err = getJson(ErmontIncLink, "ErmontInc", &ErmontInc)
+	err = getJson(GreatestHitsCannabisTauntonLink, "GreatestHitsCannabisTaunton", &GreatestHitsCannabisTaunton)
+	err = getJson(CuraleafMAHanoverLink, "CuraleafMAHanover", &CuraleafMAHanover)
+	err = getJson(PanaceaWellnessRecLink, "PanaceaWellnessRec", &PanaceaWellnessRec)
+	err = getJson(PanaceaWellnessLink, "PanaceaWellness", &PanaceaWellness)
+	err = getJson(QuincyCannabisCoLink, "QuincyCannabisCo", &QuincyCannabisCo)
+	err = getJson(CommonwealthAlternativeCareTauntonMedLink, "CommonwealthAlternativeCareTauntonMed", &CommonwealthAlternativeCareTauntonMed)
+	err = getJson(CommonwealthAlternativeCareTauntonRecLink, "CommonwealthAlternativeCareTauntonRec", &CommonwealthAlternativeCareTauntonRec)
+	err = getJson(TERPSAttleboroLink, "TERPSAttleboro", &TERPSAttleboro)
 
 	db, err := sql.Open("mysql", "root:password1@tcp(127.0.0.1:3306)/MYSQL80")
 

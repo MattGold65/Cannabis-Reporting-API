@@ -20,6 +20,8 @@ var testflower2 ProductData
 var j int
 var totalsCRAPPED int
 
+var k int
+
 func TestProductIDs(t *testing.T) {
 
 	// Set the directory path
@@ -57,8 +59,6 @@ func TestProductIDs(t *testing.T) {
 				t.Log(err)
 				t.Fail()
 			}
-			var k int
-			k = 0
 			for i := range testflower.Data.FilteredProducts.Products {
 				Brand := testflower.Data.FilteredProducts.Products[i].BrandName
 				Name := testflower.Data.FilteredProducts.Products[i].ProductName
@@ -76,7 +76,6 @@ func TestProductIDs(t *testing.T) {
 				}
 
 			}
-			fmt.Printf("The total count is: %d \n", k)
 
 			//perform check here if testflower2 is not empty
 
@@ -88,5 +87,7 @@ func TestProductIDs(t *testing.T) {
 		}
 
 	}
+
+	fmt.Printf("The total count is: %d \n", k)
 
 }
