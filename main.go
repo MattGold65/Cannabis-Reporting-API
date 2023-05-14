@@ -117,10 +117,14 @@ func main() {
 	}
 
 	defer db.Close()
-	_, err = db.Exec("CREATE TABLE Product_FlowerCommon (ProductID INT NOT NULL, BrandName VARCHAR(255) NOT NULL, ProductName VARCHAR(255) NOT NULL, THCAmount FLOAT NOT NULL, THCUnit VARCHAR(255) NOT NULL, THCTypeName VARCHAR(255) NOT NULL, CBDAMOUNT FLOAT NOT NULL, CBDUnit VARCHAR(255) NOT NULL, CBDTypeName VARCHAR(255) NOT NULL, CannabinoidsAmount FLOAT NOT NULL, CannabinoidsUnit VARCHAR(255) NOT NULL, CannabinoidsTypename VARCHAR(255) NOT NULL, CannabinoidsTypeName2 VARCHAR(255) NOT NULL, CannabinoidsTypeName3 VARCHAR(255) NOT NULL, RexaledRating FLOAT NOT NULL, PainReliefRating FLOAT NOT NULL, SleepyRating FLOAT NOT NULL, HappyRating FLOAT NOT NULL, EuphoricRating FLOAT NOT NULL, PRIMARY KEY (ProductID))")
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS Product_FlowerCommon (ProductID VARCHAR(255) NOT NULL, BrandName VARCHAR(255) NOT NULL, ProductName VARCHAR(255) NOT NULL, THCAmount FLOAT, THCUnit VARCHAR(255), THCTypeName VARCHAR(255), CBDAMOUNT FLOAT, CBDUnit VARCHAR(255), CBDTypeName VARCHAR(255), RexaledRating FLOAT, PainReliefRating FLOAT, SleepyRating FLOAT, HappyRating FLOAT, EuphoricRating FLOAT, PRIMARY KEY (ProductID))")
 	if err != nil {
 		panic(err.Error())
 	}
+
+	InsertDataProductFlowerCommon(db, CommonwealthAltcareRec)
+
+	//fmt.Println(CommonwealthAltcareRec.Data.FilteredProducts.Products[0].CBDContent.Range[0])
 
 	fmt.Println("Great Success")
 
@@ -136,6 +140,37 @@ func main() {
 
 	fmt.Println(PanaceaWellnessQuincy.Data.FilteredProducts.Products[0].ProductName)
 
+}
+
+func InsertDataProductFlowerCommon(db *sql.DB, target ProductData) {
+
+	//test for now turn this into function where we can call this loop on every single dispensary json
+	for i := range target.Data.FilteredProducts.Products {
+
+		stmt, err := db.Prepare("INSERT INTO Product_FlowerCommon (ProductID, BrandName, ProductName, THCAmount, THCUnit, THCTypeName, CBDAMOUNT, CBDUnit, CBDTypeName,RexaledRating, PainReliefRating, SleepyRating, HappyRating, EuphoricRating) VALUES (?, ?,?, ?,?, ?,?, ?,?, ?,?, ?,?, ?)")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		defer stmt.Close()
+
+		var thcAmount, cbdAmount float64
+		if len(target.Data.FilteredProducts.Products[i].THCContent.Range) > 0 {
+			thcAmount = target.Data.FilteredProducts.Products[i].THCContent.Range[0]
+		}
+		if len(target.Data.FilteredProducts.Products[i].CBDContent.Range) > 0 {
+			cbdAmount = target.Data.FilteredProducts.Products[i].CBDContent.Range[0]
+		}
+
+		// Execute the INSERT statement with values
+		_, err = stmt.Exec(target.Data.FilteredProducts.Products[i].Id, target.Data.FilteredProducts.Products[i].BrandName, target.Data.FilteredProducts.Products[i].ProductName, thcAmount, target.Data.FilteredProducts.Products[i].THCContent.Unit, target.Data.FilteredProducts.Products[i].THCContent.Typename, cbdAmount, target.Data.FilteredProducts.Products[i].CBDContent.Unit, target.Data.FilteredProducts.Products[i].CBDContent.Typename, target.Data.FilteredProducts.Products[i].Effects.RelaxedRating, target.Data.FilteredProducts.Products[i].Effects.PainReliefRating, target.Data.FilteredProducts.Products[i].Effects.SleepyRating, target.Data.FilteredProducts.Products[i].Effects.HappyRating, target.Data.FilteredProducts.Products[i].Effects.EuphoricRating)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+	}
 }
 
 // find a way to combine saveJsontoFile with getJson
