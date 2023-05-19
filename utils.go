@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"strings"
 )
 
 func getJson(url string, dispensaryName string, target interface{}) error {
@@ -46,7 +47,7 @@ func saveJsontoFile(filename string, target interface{}) {
 
 func addPrimaryKey(db *sql.DB, columnName string) error {
 	// Prepare the ALTER TABLE query
-	query := fmt.Sprintf("ALTER TABLE Product_FlowerCommon ADD COLUMN `%s` INT AUTO_INCREMENT PRIMARY KEY", columnName)
+	query := fmt.Sprintf("ALTER TABLE dispensarycommon ADD COLUMN `%s` INT AUTO_INCREMENT PRIMARY KEY", columnName)
 
 	// Execute the ALTER TABLE query
 	_, err := db.Exec(query)
@@ -81,4 +82,39 @@ func ConvertToFloat(str string) (float64, error) {
 		return 0, err
 	}
 	return floatValue, nil
+}
+
+func GenerateFlowerProductLinkName(target FlowerData) []string {
+	var LinkReadyProducts []string
+	for i := range target.Data.FilteredProducts.Products {
+		currentProduct := target.Data.FilteredProducts.Products[i].ProductName
+		//replace "-" link with " "
+		currentProduct = strings.ReplaceAll(currentProduct, "-", "")
+		currentProduct = strings.ReplaceAll(currentProduct, ":", "-")
+		currentProduct = strings.ReplaceAll(currentProduct, ".", "-")
+		currentProduct = strings.ReplaceAll(currentProduct, "  ", " ")
+
+		//remove unwanted characters from the string
+		//change this to a slice and iterate through the slice and remove each char individually
+		removeChars := ":/?#[]@&='"
+		for _, char := range removeChars {
+
+			currentProduct = strings.ReplaceAll(currentProduct, string(char), "")
+
+		}
+
+		//replace " " with "-"
+		currentProduct = strings.ReplaceAll(currentProduct, " ", "-")
+
+		//append front of menu tag
+		currentProduct = "?dtche%5Bproduct%5D=" + currentProduct
+
+		currentProduct = strings.ToLower(currentProduct)
+
+		LinkReadyProducts = append(LinkReadyProducts, currentProduct)
+
+	}
+
+	return LinkReadyProducts
+
 }

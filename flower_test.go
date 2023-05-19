@@ -14,9 +14,9 @@ import (
 // Take written JSON files from main and test those instead of making a new get request
 // iterate through testFiles folder and return error with the name of the file that failed
 
-var testflower ProductData
+var testflower FlowerData
 
-var testflower2 ProductData
+var testflower2 FlowerData
 var j int
 var totalsCRAPPED int
 

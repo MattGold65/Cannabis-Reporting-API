@@ -7,104 +7,187 @@ import (
 	"time"
 )
 
-/*
-Next steps:
-1) test every field among multiple dispensaries and fix any bugs with unmarshalling
-2) figure out a way to iterate through all the products on a page
-3) figure out a way to iterate though all the pages. Hopefully this can be done by manipulating the links and iterating though until a request is made unsuccessfully
-4) establish a database draft
-5) start making other products compatible
-*/
-
 var client *http.Client
-var LegalGreens ProductData
-var CommonwealthAltcareRec ProductData
-var AtlanticMedicinalPartners ProductData
-var InGoodHealthMedical ProductData
-var PanaceaWellnessQuincy ProductData
-var CommonwealthAlternativeCareBrocktonMed ProductData
-var CannapiDispensary ProductData
-var BrocktonGreenHeart ProductData
-var GTEBrocktonLLCdbaBoteraBrockton ProductData
-var BudsGoodsProvisionsAbington ProductData
-var CannaVana ProductData
-var NativeSunNorthAttleboro ProductData
-var Yamba ProductData
-var BudsGoodsProvisionsWatertown ProductData
-var SiraNaturalsSomervilleMedical ProductData
-var MistyMountainShopMalden ProductData
-var GardenRemediesRecMelrose ProductData
-var GardenRemediesMedMelrose ProductData
-var OldeWorldRemedies ProductData
-var NaturesMedicinesFallRiver ProductData
-var GoodChemistryLynn ProductData
-var DiemLynn ProductData
-var LocalCannabisCoSwampscott ProductData
-var NewLeafFallRiver ProductData
-var INSAIncSalemAdultUse ProductData
-var InsaAvon ProductData
-var RhelmCannabis ProductData
-var TheoryWellnessBostonAreaDelivery ProductData
-var TheoryWellnessBridgewater ProductData
-var AlternativeCompassionServices ProductData
-var HealthCircle ProductData
-var GreenRockCannabis ProductData
-var ReleafAlternatives ProductData
-var ErmontInc ProductData
-var GreatestHitsCannabisTaunton ProductData
-var CuraleafMAHanover ProductData
-var PanaceaWellnessRec ProductData
-var PanaceaWellness ProductData
-var QuincyCannabisCo ProductData
-var CommonwealthAlternativeCareTauntonMed ProductData
-var CommonwealthAlternativeCareTauntonRec ProductData
-var TERPSAttleboro ProductData
+
+var LegalGreensDispo DispoData
+var CommonwealthAltcareRecDispo DispoData
+var AtlanticMedicinalPartnersDispo DispoData
+var InGoodHealthRecDispo DispoData
+var InGoodHealthMedicalDispo DispoData
+var PanaceaWellnessQuincyDispo DispoData
+var CommonwealthAlternativeCareBrocktonMedDispo DispoData
+var CannapiDispensaryDispo DispoData
+var BrocktonGreenHeartDispo DispoData
+var GTEBrocktonLLCdbaBoteraBrocktonDispo DispoData
+var BudsGoodsProvisionsAbingtonDispo DispoData
+var CannaVanaDispo DispoData
+var NativeSunNorthAttleboroDispo DispoData
+var YambaDispo DispoData
+var BudsGoodsProvisionsWatertownDispo DispoData
+var SiraNaturalsSomervilleMedicalDispo DispoData
+var MistyMountainShopMaldenDispo DispoData
+var GardenRemediesRecMelroseDispo DispoData
+var GardenRemediesMedMelroseDispo DispoData
+var OldeWorldRemediesDispo DispoData
+var NaturesMedicinesFallRiverDispo DispoData
+var GoodChemistryLynnDispo DispoData
+var DiemLynnDispo DispoData
+var LocalCannabisCoSwampscottDispo DispoData
+var NewLeafFallRiverDispo DispoData
+var INSAIncSalemAdultUseDispo DispoData
+var InsaAvonDispo DispoData
+var RhelmCannabisDispo DispoData
+var TheoryWellnessBostonAreaDeliveryDispo DispoData
+var TheoryWellnessBridgewaterDispo DispoData
+var AlternativeCompassionServicesDispo DispoData
+var HealthCircleDispo DispoData
+var GreenRockCannabisDispo DispoData
+var ReleafAlternativesDispo DispoData
+var ErmontIncDispo DispoData
+var GreatestHitsCannabisTauntonDispo DispoData
+var CuraleafMAHanoverDispo DispoData
+var PanaceaWellnessRecDispo DispoData
+var PanaceaWellnessDispo DispoData
+var QuincyCannabisCoDispo DispoData
+var CommonwealthAlternativeCareTauntonMedDispo DispoData
+var CommonwealthAlternativeCareTauntonRecDispo DispoData
+var TERPSAttleboroDispo DispoData
+
+var LegalGreens FlowerData
+var CommonwealthAltcareRec FlowerData
+var AtlanticMedicinalPartners FlowerData
+var InGoodHealthRec FlowerData
+var InGoodHealthMedical FlowerData
+var PanaceaWellnessQuincy FlowerData
+var CommonwealthAlternativeCareBrocktonMed FlowerData
+var CannapiDispensary FlowerData
+var BrocktonGreenHeart FlowerData
+var GTEBrocktonLLCdbaBoteraBrockton FlowerData
+var BudsGoodsProvisionsAbington FlowerData
+var CannaVana FlowerData
+var NativeSunNorthAttleboro FlowerData
+var Yamba FlowerData
+var BudsGoodsProvisionsWatertown FlowerData
+var SiraNaturalsSomervilleMedical FlowerData
+var MistyMountainShopMalden FlowerData
+var GardenRemediesRecMelrose FlowerData
+var GardenRemediesMedMelrose FlowerData
+var OldeWorldRemedies FlowerData
+var NaturesMedicinesFallRiver FlowerData
+var GoodChemistryLynn FlowerData
+var DiemLynn FlowerData
+var LocalCannabisCoSwampscott FlowerData
+var NewLeafFallRiver FlowerData
+var INSAIncSalemAdultUse FlowerData
+var InsaAvon FlowerData
+var RhelmCannabis FlowerData
+var TheoryWellnessBostonAreaDelivery FlowerData
+var TheoryWellnessBridgewater FlowerData
+var AlternativeCompassionServices FlowerData
+var HealthCircle FlowerData
+var GreenRockCannabis FlowerData
+var ReleafAlternatives FlowerData
+var ErmontInc FlowerData
+var GreatestHitsCannabisTaunton FlowerData
+var CuraleafMAHanover FlowerData
+var PanaceaWellnessRec FlowerData
+var PanaceaWellness FlowerData
+var QuincyCannabisCo FlowerData
+var CommonwealthAlternativeCareTauntonMed FlowerData
+var CommonwealthAlternativeCareTauntonRec FlowerData
+var TERPSAttleboro FlowerData
 
 func main() {
 	client = &http.Client{Timeout: 10 * time.Second}
+
+	err := getJson(LegalGreensDispoLink, "LegalGreensDispo", &LegalGreensDispo)
+	err = getJson(CommonwealthAltcareRecDispoLink, "CommonwealthAltcareRecDispo", &CommonwealthAltcareRecDispo)
+	err = getJson(AtlanticMedicinalPartnersBrocktonRecDispoLink, "AtlanticMedicinalPartnersDispo", &AtlanticMedicinalPartnersDispo)
+	err = getJson(InGoodHealthRecDispoLink, "InGoodHealthRecDispo", &InGoodHealthRecDispo)
+	err = getJson(InGoodHealthMedicalDispoLink, "InGoodHealthMedicalDispo", &InGoodHealthMedicalDispo)
+	err = getJson(PanaceaWellnessQuincyDispoLink, "PanaceaWellnessQuincyDispo", &PanaceaWellnessQuincyDispo)
+	err = getJson(CommonwealthAlternativeCareBrocktonMedDispoLink, "CommonwealthAlternativeCareBrocktonMedDispo", &CommonwealthAlternativeCareBrocktonMedDispo)
+	err = getJson(CannapiDispensaryDispoLink, "CannapiDispensaryDispo", &CannapiDispensaryDispo)
+	err = getJson(BrocktonGreenHeartDispoLink, "BrocktonGreenHeartDispo", &BrocktonGreenHeartDispo)
+	err = getJson(GTEBrocktonLLCdbaBoteraBrocktonDispoLink, "GTEBrocktonLLCdbaBoteraBrocktonDispo", &GTEBrocktonLLCdbaBoteraBrocktonDispo)
+	err = getJson(BudsGoodsProvisionsAbingtonDispoLink, "BudsGoodsProvisionsAbingtonDispo", &BudsGoodsProvisionsAbingtonDispo)
+	err = getJson(CannaVanaDispoLink, "CannaVanaDispo", &CannaVanaDispo)
+	err = getJson(NativeSunNorthAttleboroDispoLink, "NativeSunNorthAttleboroDispo", &NativeSunNorthAttleboroDispo)
+	err = getJson(YambaDispoLink, "YambaDispo", &YambaDispo)
+	err = getJson(BudsGoodsProvisionsWatertownDispoLink, "BudsGoodsProvisionsWatertownDispo", &BudsGoodsProvisionsWatertownDispo)
+	err = getJson(SiraNaturalsSomervilleMedicalDispoLink, "SiraNaturalsSomervilleMedicalDispo", &SiraNaturalsSomervilleMedicalDispo)
+	err = getJson(MistyMountainShopMaldenDispoLink, "MistyMountainShopMaldenDispo", &MistyMountainShopMaldenDispo)
+	err = getJson(GardenRemediesRecMelroseDispoLink, "GardenRemediesRecMelroseDispo", &GardenRemediesRecMelroseDispo)
+	err = getJson(GardenRemediesMedMelroseDispoLink, "GardenRemediesMedMelroseDispo", &GardenRemediesMedMelroseDispo)
+	err = getJson(OldeWorldRemediesDispoLink, "OldeWorldRemediesDispo", &OldeWorldRemediesDispo)
+	err = getJson(NaturesMedicinesFallRiverDispoLink, "NaturesMedicinesFallRiverDispo", &NaturesMedicinesFallRiverDispo)
+	err = getJson(GoodChemistryLynnDispoLink, "GoodChemistryLynnDispo", &GoodChemistryLynnDispo)
+	err = getJson(DiemLynnDispoLink, "DiemLynnDispo", &DiemLynnDispo)
+	err = getJson(LocalCannabisCoSwampscottDispoLink, "LocalCannabisCoSwampscottDispo", &LocalCannabisCoSwampscottDispo)
+	err = getJson(NewLeafFallRiverDispoLink, "NewLeafFallRiverDispo", &NewLeafFallRiverDispo)
+	err = getJson(INSAIncSalemAdultUseDispoLink, "INSAIncSalemAdultUseDispo", &INSAIncSalemAdultUseDispo)
+	err = getJson(InsaAvonDispoLink, "InsaAvonDispo", &InsaAvonDispo)
+	err = getJson(RhelmCannabisDispoLink, "RhelmCannabisDispo", &RhelmCannabisDispo)
+	err = getJson(TheoryWellnessBostonAreaDeliveryDispoLink, "TheoryWellnessBostonAreaDeliveryDispo", &TheoryWellnessBostonAreaDeliveryDispo)
+	err = getJson(TheoryWellnessBridgewaterDispoLink, "TheoryWellnessBridgewaterDispo", &TheoryWellnessBridgewaterDispo)
+	err = getJson(AlternativeCompassionServicesDispoLink, "AlternativeCompassionServicesDispo", &AlternativeCompassionServicesDispo)
+	err = getJson(HealthCircleDispoLink, "HealthCircleDispo", &HealthCircleDispo)
+	err = getJson(GreenRockCannabisDispoLink, "GreenRockCannabisDispo", &GreenRockCannabisDispo)
+	err = getJson(ReleafAlternativesDispoLink, "ReleafAlternativesDispo", &ReleafAlternativesDispo)
+	err = getJson(ErmontIncDispoLink, "ErmontIncDispo", &ErmontIncDispo)
+	err = getJson(GreatestHitsCannabisTauntonDispoLink, "GreatestHitsCannabisTauntonDispo", &GreatestHitsCannabisTauntonDispo)
+	err = getJson(CuraleafMAHanoverDispoLink, "CuraleafMAHanoverDispo", &CuraleafMAHanoverDispo)
+	err = getJson(PanaceaWellnessRecDispoLink, "PanaceaWellnessRecDispo", &PanaceaWellnessRecDispo)
+	err = getJson(PanaceaWellnessDispoLink, "PanaceaWellnessDispo", &PanaceaWellnessDispo)
+	err = getJson(QuincyCannabisCoDispoLink, "QuincyCannabisCoDispo", &QuincyCannabisCoDispo)
+	err = getJson(CommonwealthAlternativeCareTauntonMedDispoLink, "CommonwealthAlternativeCareTauntonMedDispo", &CommonwealthAlternativeCareTauntonMedDispo)
+	err = getJson(CommonwealthAlternativeCareTauntonRecDispoLink, "CommonwealthAlternativeCareTauntonRecDispo", &CommonwealthAlternativeCareTauntonRecDispo)
+	err = getJson(TERPSAttleboroDispoLink, "TERPSAttleboroDispo", &TERPSAttleboroDispo)
+
 	/*
-		err := getJson(CommonwealthAltcareRecLink, "CommonwealthAltcareRec", &CommonwealthAltcareRec)
-		err = getJson(LegalGreensLink, "LegalGreens", &LegalGreens)
-		err = getJson(AtlanticMedicinalPartnersBrocktonRecLink, "AtlanticMedicinalPartners", &AtlanticMedicinalPartners)
-		err = getJson(InGoodHealthMedicalLink, "InGoodHealthMedical", &InGoodHealthMedical)
-		err = getJson(PanaceaWellnessQuincyLink, "PanaceaWellnessQuincy", &PanaceaWellnessQuincy)
-		err = getJson(CommonwealthAlternativeCareBrocktonMedLink, "CommonwealthAlternativeCareBrocktonMed", &CommonwealthAlternativeCareBrocktonMed)
-		err = getJson(CannapiDispensaryLink, "CannapiDispensary", &CannapiDispensary)
-		err = getJson(BrocktonGreenHeartLink, "BrocktonGreenHeart", &BrocktonGreenHeart)
-		err = getJson(GTEBrocktonLLCdbaBoteraBrocktonLink, "GTEBrocktonLLCdbaBoteraBrockton", &GTEBrocktonLLCdbaBoteraBrockton)
-		err = getJson(BudsGoodsProvisionsAbingtonLink, "BudsGoodsProvisionsAbington", &BudsGoodsProvisionsAbington)
-		err = getJson(CannaVanaLink, "CannaVana", &CannaVana)
-		err = getJson(NativeSunNorthAttleboroLink, "NativeSunNorthAttleboro", &NativeSunNorthAttleboro)
-		err = getJson(YambaLink, "Yamba", &Yamba)
-		err = getJson(BudsGoodsProvisionsWatertownLink, "BudsGoodsProvisionsWatertown", &BudsGoodsProvisionsWatertown)
-		err = getJson(SiraNaturalsSomervilleMedicalLink, "SiraNaturalsSomervilleMedical", &SiraNaturalsSomervilleMedical)
-		err = getJson(MistyMountainShopMaldenLink, "MistyMountainShopMalden", &MistyMountainShopMalden)
-		err = getJson(GardenRemediesRecMelroseLink, "GardenRemediesRecMelrose", &GardenRemediesRecMelrose)
-		err = getJson(GardenRemediesMedMelroseLink, "GardenRemediesMedMelrose", &GardenRemediesMedMelrose)
-		err = getJson(OldeWorldRemediesLink, "OldeWorldRemedies", &OldeWorldRemedies)
-		err = getJson(NaturesMedicinesFallRiverLink, "NaturesMedicinesFallRiver", &NaturesMedicinesFallRiver)
-		err = getJson(GoodChemistryLynnLink, "GoodChemistryLynn", &GoodChemistryLynn)
-		err = getJson(DiemLynnLink, "DiemLynn", &DiemLynn)
-		err = getJson(LocalCannabisCoSwampscottLink, "LocalCannabisCoSwampscott", &LocalCannabisCoSwampscott)
-		err = getJson(NewLeafFallRiverLink, "NewLeafFallRiver", &NewLeafFallRiver)
-		err = getJson(INSAIncSalemAdultUseLink, "INSAIncSalemAdultUse", &INSAIncSalemAdultUse)
-		err = getJson(InsaAvonLink, "InsaAvon", &InsaAvon)
-		err = getJson(RhelmCannabisLink, "RhelmCannabis", &RhelmCannabis)
-		err = getJson(TheoryWellnessBostonAreaDeliveryLink, "TheoryWellnessBostonAreaDelivery", &TheoryWellnessBostonAreaDelivery)
-		err = getJson(TheoryWellnessBridgewaterLink, "TheoryWellnessBridgewater", &TheoryWellnessBridgewater)
-		err = getJson(AlternativeCompassionServicesLink, "AlternativeCompassionServices", &AlternativeCompassionServices)
-		err = getJson(HealthCircleLink, "HealthCircle", &HealthCircle)
-		err = getJson(GreenRockCannabisLink, "GreenRockCannabis", &GreenRockCannabis)
-		err = getJson(ReleafAlternativesLink, "ReleafAlternatives", &ReleafAlternatives)
-		err = getJson(ErmontIncLink, "ErmontInc", &ErmontInc)
-		err = getJson(GreatestHitsCannabisTauntonLink, "GreatestHitsCannabisTaunton", &GreatestHitsCannabisTaunton)
-		err = getJson(CuraleafMAHanoverLink, "CuraleafMAHanover", &CuraleafMAHanover)
-		err = getJson(PanaceaWellnessRecLink, "PanaceaWellnessRec", &PanaceaWellnessRec)
-		err = getJson(PanaceaWellnessLink, "PanaceaWellness", &PanaceaWellness)
-		err = getJson(QuincyCannabisCoLink, "QuincyCannabisCo", &QuincyCannabisCo)
-		err = getJson(CommonwealthAlternativeCareTauntonMedLink, "CommonwealthAlternativeCareTauntonMed", &CommonwealthAlternativeCareTauntonMed)
-		err = getJson(CommonwealthAlternativeCareTauntonRecLink, "CommonwealthAlternativeCareTauntonRec", &CommonwealthAlternativeCareTauntonRec)
-		err = getJson(TERPSAttleboroLink, "TERPSAttleboro", &TERPSAttleboro)
+			err := getJson(LegalGreensLink, "LegalGreens", &LegalGreens)
+		   	err := getJson(CommonwealthAltcareRecLink, "CommonwealthAltcareRec", &CommonwealthAltcareRec)
+		   	err = getJson(AtlanticMedicinalPartnersBrocktonRecLink, "AtlanticMedicinalPartners", &AtlanticMedicinalPartners)
+			err = getJson(InGoodHealthRecLink, "InGoodHealthRec", &InGoodHealthRec)
+		   	err = getJson(InGoodHealthMedicalLink, "InGoodHealthMedical", &InGoodHealthMedical)
+		   	err = getJson(PanaceaWellnessQuincyLink, "PanaceaWellnessQuincy", &PanaceaWellnessQuincy)
+		   	err = getJson(CommonwealthAlternativeCareBrocktonMedLink, "CommonwealthAlternativeCareBrocktonMed", &CommonwealthAlternativeCareBrocktonMed)
+		   	err = getJson(CannapiDispensaryLink, "CannapiDispensary", &CannapiDispensary)
+		   	err = getJson(BrocktonGreenHeartLink, "BrocktonGreenHeart", &BrocktonGreenHeart)
+		   	err = getJson(GTEBrocktonLLCdbaBoteraBrocktonLink, "GTEBrocktonLLCdbaBoteraBrockton", &GTEBrocktonLLCdbaBoteraBrockton)
+		   	err = getJson(BudsGoodsProvisionsAbingtonLink, "BudsGoodsProvisionsAbington", &BudsGoodsProvisionsAbington)
+		   	err = getJson(CannaVanaLink, "CannaVana", &CannaVana)
+		   	err = getJson(NativeSunNorthAttleboroLink, "NativeSunNorthAttleboro", &NativeSunNorthAttleboro)
+		   	err = getJson(YambaLink, "Yamba", &Yamba)
+		   	err = getJson(BudsGoodsProvisionsWatertownLink, "BudsGoodsProvisionsWatertown", &BudsGoodsProvisionsWatertown)
+		   	err = getJson(SiraNaturalsSomervilleMedicalLink, "SiraNaturalsSomervilleMedical", &SiraNaturalsSomervilleMedical)
+		   	err = getJson(MistyMountainShopMaldenLink, "MistyMountainShopMalden", &MistyMountainShopMalden)
+		   	err = getJson(GardenRemediesRecMelroseLink, "GardenRemediesRecMelrose", &GardenRemediesRecMelrose)
+		   	err = getJson(GardenRemediesMedMelroseLink, "GardenRemediesMedMelrose", &GardenRemediesMedMelrose)
+		   	err = getJson(OldeWorldRemediesLink, "OldeWorldRemedies", &OldeWorldRemedies)
+		   	err = getJson(NaturesMedicinesFallRiverLink, "NaturesMedicinesFallRiver", &NaturesMedicinesFallRiver)
+		   	err = getJson(GoodChemistryLynnLink, "GoodChemistryLynn", &GoodChemistryLynn)
+		   	err = getJson(DiemLynnLink, "DiemLynn", &DiemLynn)
+		   	err = getJson(LocalCannabisCoSwampscottLink, "LocalCannabisCoSwampscott", &LocalCannabisCoSwampscott)
+		   	err = getJson(NewLeafFallRiverLink, "NewLeafFallRiver", &NewLeafFallRiver)
+		   	err = getJson(INSAIncSalemAdultUseLink, "INSAIncSalemAdultUse", &INSAIncSalemAdultUse)
+		   	err = getJson(InsaAvonLink, "InsaAvon", &InsaAvon)
+		   	err = getJson(RhelmCannabisLink, "RhelmCannabis", &RhelmCannabis)
+		   	err = getJson(TheoryWellnessBostonAreaDeliveryLink, "TheoryWellnessBostonAreaDelivery", &TheoryWellnessBostonAreaDelivery)
+		   	err = getJson(TheoryWellnessBridgewaterLink, "TheoryWellnessBridgewater", &TheoryWellnessBridgewater)
+		   	err = getJson(AlternativeCompassionServicesLink, "AlternativeCompassionServices", &AlternativeCompassionServices)
+		   	err = getJson(HealthCircleLink, "HealthCircle", &HealthCircle)
+		   	err = getJson(GreenRockCannabisLink, "GreenRockCannabis", &GreenRockCannabis)
+		   	err = getJson(ReleafAlternativesLink, "ReleafAlternatives", &ReleafAlternatives)
+		   	err = getJson(ErmontIncLink, "ErmontInc", &ErmontInc)
+		   	err = getJson(GreatestHitsCannabisTauntonLink, "GreatestHitsCannabisTaunton", &GreatestHitsCannabisTaunton)
+		   	err = getJson(CuraleafMAHanoverLink, "CuraleafMAHanover", &CuraleafMAHanover)
+		   	err = getJson(PanaceaWellnessRecLink, "PanaceaWellnessRec", &PanaceaWellnessRec)
+		   	err = getJson(PanaceaWellnessLink, "PanaceaWellness", &PanaceaWellness)
+		   	err = getJson(QuincyCannabisCoLink, "QuincyCannabisCo", &QuincyCannabisCo)
+		   	err = getJson(CommonwealthAlternativeCareTauntonMedLink, "CommonwealthAlternativeCareTauntonMed", &CommonwealthAlternativeCareTauntonMed)
+		   	err = getJson(CommonwealthAlternativeCareTauntonRecLink, "CommonwealthAlternativeCareTauntonRec", &CommonwealthAlternativeCareTauntonRec)
+			err = getJson(TERPSAttleboroLink, "TERPSAttleboro", &TERPSAttleboro)
 
 	*/
 
@@ -120,33 +203,26 @@ func main() {
 		panic(err.Error())
 	}
 
-	var products []ProductData
+	_, err = db.Exec("CREATE TABLE IF NOT EXISTS DispensaryCommon (DispensaryID VARCHAR(255), DispensaryName VARCHAR(255), Website VARCHAR(255), Email VARCHAR(255), Phone VARCHAR(255), Address VARCHAR(255), State VARCHAR(255), City VARCHAR(255), Street VARCHAR(255), Street2 VARCHAR(255), Zipcode VARCHAR(255), Latitude FLOAT, Longitdue FLOAT, type VARCHAR(255))")
+	if err != nil {
+		panic(err.Error())
+	}
+	addPrimaryKey(db, "PrimaryKey")
 
-	// add all the variables to the slice using append
-	//addPrimaryKey(db, "PrimaryKey")
+	var Dispensaries []DispoData
 
-	products = append(products, LegalGreens, CommonwealthAltcareRec, AtlanticMedicinalPartners, InGoodHealthMedical, PanaceaWellnessQuincy, CommonwealthAlternativeCareBrocktonMed, CannapiDispensary, BrocktonGreenHeart, GTEBrocktonLLCdbaBoteraBrockton, BudsGoodsProvisionsAbington, CannaVana, NativeSunNorthAttleboro, Yamba, BudsGoodsProvisionsWatertown, SiraNaturalsSomervilleMedical, MistyMountainShopMalden, GardenRemediesRecMelrose, GardenRemediesMedMelrose, OldeWorldRemedies, NaturesMedicinesFallRiver, GoodChemistryLynn, DiemLynn, LocalCannabisCoSwampscott, NewLeafFallRiver, INSAIncSalemAdultUse, InsaAvon, RhelmCannabis, TheoryWellnessBostonAreaDelivery, TheoryWellnessBridgewater, AlternativeCompassionServices, HealthCircle, GreenRockCannabis, ReleafAlternatives, ErmontInc, GreatestHitsCannabisTaunton, CuraleafMAHanover, PanaceaWellnessRec, PanaceaWellness, QuincyCannabisCo, CommonwealthAlternativeCareTauntonMed, CommonwealthAlternativeCareTauntonRec, TERPSAttleboro)
+	Dispensaries = append(Dispensaries, LegalGreensDispo, CommonwealthAltcareRecDispo, AtlanticMedicinalPartnersDispo, InGoodHealthRecDispo, InGoodHealthMedicalDispo, PanaceaWellnessQuincyDispo, CommonwealthAlternativeCareBrocktonMedDispo, CannapiDispensaryDispo, BrocktonGreenHeartDispo, GTEBrocktonLLCdbaBoteraBrocktonDispo, BudsGoodsProvisionsAbingtonDispo, CannaVanaDispo, NativeSunNorthAttleboroDispo, YambaDispo, BudsGoodsProvisionsWatertownDispo, SiraNaturalsSomervilleMedicalDispo, MistyMountainShopMaldenDispo, GardenRemediesRecMelroseDispo, GardenRemediesMedMelroseDispo, OldeWorldRemediesDispo, NaturesMedicinesFallRiverDispo, GoodChemistryLynnDispo, DiemLynnDispo, LocalCannabisCoSwampscottDispo, NewLeafFallRiverDispo, INSAIncSalemAdultUseDispo, InsaAvonDispo, RhelmCannabisDispo, TheoryWellnessBostonAreaDeliveryDispo, TheoryWellnessBridgewaterDispo, AlternativeCompassionServicesDispo, HealthCircleDispo, GreenRockCannabisDispo, ReleafAlternativesDispo, ErmontIncDispo, GreatestHitsCannabisTauntonDispo, CuraleafMAHanoverDispo, PanaceaWellnessRecDispo, PanaceaWellnessDispo, QuincyCannabisCoDispo, CommonwealthAlternativeCareTauntonMedDispo, CommonwealthAlternativeCareTauntonRecDispo, TERPSAttleboroDispo)
+	for _, DispoData := range Dispensaries {
+		InsertDataDispoCommon(db, DispoData)
+	}
+
+	//var products []FlowerData
+	//products = append(products, LegalGreens, CommonwealthAltcareRec, AtlanticMedicinalPartners, InGoodHealthRec, InGoodHealthMedical, PanaceaWellnessQuincy, CommonwealthAlternativeCareBrocktonMed, CannapiDispensary, BrocktonGreenHeart, GTEBrocktonLLCdbaBoteraBrockton, BudsGoodsProvisionsAbington, CannaVana, NativeSunNorthAttleboro, Yamba, BudsGoodsProvisionsWatertown, SiraNaturalsSomervilleMedical, MistyMountainShopMalden, GardenRemediesRecMelrose, GardenRemediesMedMelrose, OldeWorldRemedies, NaturesMedicinesFallRiver, GoodChemistryLynn, DiemLynn, LocalCannabisCoSwampscott, NewLeafFallRiver, INSAIncSalemAdultUse, InsaAvon, RhelmCannabis, TheoryWellnessBostonAreaDelivery, TheoryWellnessBridgewater, AlternativeCompassionServices, HealthCircle, GreenRockCannabis, ReleafAlternatives, ErmontInc, GreatestHitsCannabisTaunton, CuraleafMAHanover, PanaceaWellnessRec, PanaceaWellness, QuincyCannabisCo, CommonwealthAlternativeCareTauntonMed, CommonwealthAlternativeCareTauntonRec, TERPSAttleboro)
 	/*
-		for _, productData := range products {
-			InsertDataProductFlowerCommon(db, productData)
+		for _, FlowerData := range products {
+			InsertDataProductFlowerCommon(db, FlowerData)
 		}
 
 	*/
-	var CommonwealthAlternativeCareBrocktonMedDispo map[string]interface{}
-	var LegalGreensDispo map[string]interface{}
-
-	getJson("https://dutchie.com/graphql?operationName=ConsumerDispensaries&variables=%7B%22dispensaryFilter%22%3A%7B%22cNameOrID%22%3A%22commonwealth-alternative-care-brockton%22%7D%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22f44ceb73f96c7fa3016ea2b9c6b68a5b92a62572317849bc4d6d9a724b93c83d%22%7D%7D", "CommonwealthAlternativeCareBrocktonMedDispoJson", &CommonwealthAlternativeCareBrocktonMedDispo)
-	getJson("https://dutchie.com/graphql?operationName=ConsumerDispensaries&variables=%7B%22dispensaryFilter%22%3A%7B%22cNameOrID%22%3A%22legal-greens-brockton%22%7D%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22f44ceb73f96c7fa3016ea2b9c6b68a5b92a62572317849bc4d6d9a724b93c83d%22%7D%7D", "LegalGreensDispo", &LegalGreensDispo)
 
 }
-
-// find a way to combine saveJsontoFile with getJson
-// everytime we grab a json from the web in main we want to write a file so that we can test the json
-// will need to find a way to overwrite files rn access gets denied on rewrite attempt
-
-//could be helpful good data with this link
-//after 5D we just have to insert the product name with - instead of spaces and we have a link to the product on the page
-//https://dutchie.com/graphql?operationName=ConsumerDispensaries&variables=%7B%22dispensaryFilter%22%3A%7B%22cNameOrID%22%3A%22commonwealth-alternative-care-brockton%22%7D%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22f44ceb73f96c7fa3016ea2b9c6b68a5b92a62572317849bc4d6d9a724b93c83d%22%7D%7D
-//https://dutchie.com/graphql?operationName=ConsumerDispensaries&variables=%7B%22dispensaryFilter%22%3A%7B%22cNameOrID%22%3A%22legal-greens-brockton%22%7D%7D&extensions=%7B%22persistedQuery%22%3A%7B%22version%22%3A1%2C%22sha256Hash%22%3A%22f44ceb73f96c7fa3016ea2b9c6b68a5b92a62572317849bc4d6d9a724b93c83d%22%7D%7D
-//?dtche%5Bproduct%5D= 1g-flower-sunset-sherbert
-//?dtche%5Bproduct%5D= 1oz-old-pal-flower-88-g13-hash-plant-d-x-northern-lights-1

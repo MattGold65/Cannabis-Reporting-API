@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type ProductData struct {
+type FlowerData struct {
 	Data DataSet `json:"data"`
 }
 
@@ -140,7 +140,7 @@ type WeightEquivalent struct {
 	TypeName string  `json:"__typename"`
 }
 
-func InsertDataProductFlowerCommon(db *sql.DB, target ProductData) {
+func InsertDataProductFlowerCommon(db *sql.DB, target FlowerData) {
 
 	//test for now turn this into function where we can call this loop on every single dispensary json
 	for i := range target.Data.FilteredProducts.Products {
