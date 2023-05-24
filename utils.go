@@ -47,7 +47,7 @@ func saveJsontoFile(filename string, target interface{}) {
 
 func addPrimaryKey(db *sql.DB, columnName string) error {
 	// Prepare the ALTER TABLE query
-	query := fmt.Sprintf("ALTER TABLE dispensarycommon ADD COLUMN `%s` INT AUTO_INCREMENT PRIMARY KEY", columnName)
+	query := fmt.Sprintf("ALTER TABLE Product_EdiblesCommon ADD COLUMN `%s` INT AUTO_INCREMENT PRIMARY KEY", columnName)
 
 	// Execute the ALTER TABLE query
 	_, err := db.Exec(query)
@@ -74,6 +74,26 @@ func GrabRestOfString(str string) string {
 		return restOfString
 	}
 	return ""
+}
+
+func getLastTwoCharacters(str string) string {
+	length := len(str)
+	if length < 2 {
+		return "String is too short."
+	} else {
+		lastTwoCharacters := str[length-2:]
+		return lastTwoCharacters
+	}
+}
+
+func grabAllExceptLastTwo(str string) string {
+	length := len(str)
+	if length < 2 {
+		return "String is too short."
+	} else {
+		allExceptLastTwo := str[:length-2]
+		return allExceptLastTwo
+	}
 }
 
 func ConvertToFloat(str string) (float64, error) {
