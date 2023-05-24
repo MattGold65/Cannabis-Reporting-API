@@ -65,7 +65,7 @@ func main() {
 
 	//getprerollsData(db, dispensaryIDs, prerollsDataSlice)
 
-	getvapeorizersData(db, dispensaryIDs, vapeorizersDataSlice)
+	//getvapeorizersData(db, dispensaryIDs, vapeorizersDataSlice)
 
 	//getFlowerData(db, dispensaryIDs, flowerDataSlice)
 
