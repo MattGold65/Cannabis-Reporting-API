@@ -92,7 +92,7 @@ type CannabinoidType3 struct {
 }
 
 type measurements3 struct {
-	NetWeight weight2 `json:"netWeight"`
+	NetWeight weight3 `json:"netWeight"`
 	Volume    string  `json:"volume"`
 	Typename  string  `json:"__typename"`
 }
