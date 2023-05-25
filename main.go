@@ -27,46 +27,55 @@ func main() {
 	}
 
 	defer db.Close()
+	/*
+		_, err = db.Exec("CREATE TABLE IF NOT EXISTS DispensaryCommon (DispensaryID varCHAR(255), DispensaryName varCHAR(255), Website varCHAR(255), Email varCHAR(255), Phone varCHAR(255), Address varCHAR(255), State varCHAR(255), City varCHAR(255), Street varCHAR(255), Street2 varCHAR(255), Zipcode varCHAR(255), Latitude FLOAT, Longitdue FLOAT, type varCHAR(255))")
+		if err != nil {
+			panic(err.Error())
+		}
+
+		getDispensaryData(db, entries, dispoDataSlice)
+		addDispoPrimaryKey(db, "PrimaryKey")
+
+	*/
+
 	_, err = db.Exec("CREATE TABLE IF NOT EXISTS Product_FlowerCommon (EffDate DATE, DispensaryID varCHAR(255), EnterpriseProductID varCHAR(255), ProductID varCHAR(255) NOT NULL, BrandName varCHAR(255) NOT NULL, ProductName varCHAR(255) NOT NULL, Weight varCHAR(255), WeightGrams FLOAT, RecOnly BOOLEAN, RecPrice FLOAT, RecSpecialPrice Float, MedicalOnly BOOLEAN, MedicalPrice FLOAT, MedicalSpecialPrice Float, WholeSalePrice Float, InventoryQuantity int, InventoryQuantityAvail int, InventoryQuantityKiosk int, StrainType varCHAR(255),  THCAmount FLOAT, THCUnit varCHAR(255), THCTypeName varCHAR(255), CBDAMOUNT FLOAT, CBDUnit varCHAR(255), CBDTypeName varCHAR(255), RexaledRating FLOAT, PainReliefRating FLOAT, SleepyRating FLOAT, HappyRating FLOAT, EuphoricRating FLOAT, ProductImage varCHAR(255))")
 	if err != nil {
 		panic(err.Error())
 	}
+
+	getFlowerData(db, dispensaryIDs, flowerDataSlice)
+	addFlowerPrimaryKey(db, "PrimaryKey")
 
 	_, err = db.Exec("CREATE TABLE IF NOT EXISTS Product_EdiblesCommon (EffDate DATE, DispensaryID varCHAR(255), EnterpriseProductID varCHAR(255), ProductID varCHAR(255) NOT NULL, BrandName varCHAR(255) NOT NULL, ProductName varCHAR(255) NOT NULL, ProductSubCategory  varCHAR(255) NOT NULL, Weight varCHAR(255), WeightGrams FLOAT, RecOnly BOOLEAN, RecPrice FLOAT, RecSpecialPrice Float, MedicalOnly BOOLEAN, MedicalPrice FLOAT, MedicalSpecialPrice Float, WholeSalePrice Float, InventoryQuantity int, InventoryQuantityAvail int, InventoryQuantityKiosk int, StrainType varCHAR(255),  THCAmount FLOAT, THCUnit varCHAR(255), THCTypeName varCHAR(255), CBDAMOUNT FLOAT, CBDUnit varCHAR(255), CBDTypeName varCHAR(255), RexaledRating FLOAT, PainReliefRating FLOAT, SleepyRating FLOAT, HappyRating FLOAT, EuphoricRating FLOAT, ProductImage varCHAR(255))")
 	if err != nil {
 		panic(err.Error())
 	}
 
+	getEdiblesData(db, dispensaryIDs, EdiblesDataSlice)
+	addEdiblesPrimaryKey(db, "PrimaryKey")
+
 	_, err = db.Exec("CREATE TABLE IF NOT EXISTS Product_ConcentratesCommon (EffDate DATE, DispensaryID varCHAR(255), EnterpriseProductID varCHAR(255), ProductID varCHAR(255) NOT NULL, BrandName varCHAR(255) NOT NULL, ProductName varCHAR(255) NOT NULL, ProductSubCategory  varCHAR(255) NOT NULL, Weight varCHAR(255), WeightGrams FLOAT, RecOnly BOOLEAN, RecPrice FLOAT, RecSpecialPrice Float, MedicalOnly BOOLEAN, MedicalPrice FLOAT, MedicalSpecialPrice Float, WholeSalePrice Float, InventoryQuantity int, InventoryQuantityAvail int, InventoryQuantityKiosk int, StrainType varCHAR(255),  THCAmount FLOAT, THCUnit varCHAR(255), THCTypeName varCHAR(255), CBDAMOUNT FLOAT, CBDUnit varCHAR(255), CBDTypeName varCHAR(255), RexaledRating FLOAT, PainReliefRating FLOAT, SleepyRating FLOAT, HappyRating FLOAT, EuphoricRating FLOAT, ProductImage varCHAR(255))")
 	if err != nil {
 		panic(err.Error())
 	}
+
+	getConcentratesData(db, dispensaryIDs, ConcentratesDataSlice)
+	addConcentratesPrimaryKey(db, "PrimaryKey")
 
 	_, err = db.Exec("CREATE TABLE IF NOT EXISTS Product_prerollsCommon (EffDate DATE, DispensaryID varCHAR(255), EnterpriseProductID varCHAR(255), ProductID varCHAR(255) NOT NULL, BrandName varCHAR(255) NOT NULL, ProductName varCHAR(255) NOT NULL, ProductSubCategory  varCHAR(255) NOT NULL, Weight varCHAR(255), WeightGrams FLOAT, RecOnly BOOLEAN, RecPrice FLOAT, RecSpecialPrice Float, MedicalOnly BOOLEAN, MedicalPrice FLOAT, MedicalSpecialPrice Float, WholeSalePrice Float, InventoryQuantity int, InventoryQuantityAvail int, InventoryQuantityKiosk int, StrainType varCHAR(255),  THCAmount FLOAT, THCUnit varCHAR(255), THCTypeName varCHAR(255), CBDAMOUNT FLOAT, CBDUnit varCHAR(255), CBDTypeName varCHAR(255), RexaledRating FLOAT, PainReliefRating FLOAT, SleepyRating FLOAT, HappyRating FLOAT, EuphoricRating FLOAT, ProductImage varCHAR(255))")
 	if err != nil {
 		panic(err.Error())
 	}
 
+	getprerollsData(db, dispensaryIDs, prerollsDataSlice)
+	addprerollsPrimaryKey(db, "PrimaryKey")
+
 	_, err = db.Exec("CREATE TABLE IF NOT EXISTS Product_vapeorizersCommon (EffDate DATE, DispensaryID varCHAR(255), EnterpriseProductID varCHAR(255), ProductID varCHAR(255) NOT NULL, BrandName varCHAR(255) NOT NULL, ProductName varCHAR(255) NOT NULL, ProductSubCategory  varCHAR(255) NOT NULL, Weight varCHAR(255), WeightGrams FLOAT, RecOnly BOOLEAN, RecPrice FLOAT, RecSpecialPrice Float, MedicalOnly BOOLEAN, MedicalPrice FLOAT, MedicalSpecialPrice Float, WholeSalePrice Float, InventoryQuantity int, InventoryQuantityAvail int, InventoryQuantityKiosk int, StrainType varCHAR(255),  THCAmount FLOAT, THCUnit varCHAR(255), THCTypeName varCHAR(255), CBDAMOUNT FLOAT, CBDUnit varCHAR(255), CBDTypeName varCHAR(255), RexaledRating FLOAT, PainReliefRating FLOAT, SleepyRating FLOAT, HappyRating FLOAT, EuphoricRating FLOAT, ProductImage varCHAR(255))")
 	if err != nil {
 		panic(err.Error())
 	}
 
-	_, err = db.Exec("CREATE TABLE IF NOT EXISTS DispensaryCommon (DispensaryID varCHAR(255), DispensaryName varCHAR(255), Website varCHAR(255), Email varCHAR(255), Phone varCHAR(255), Address varCHAR(255), State varCHAR(255), City varCHAR(255), Street varCHAR(255), Street2 varCHAR(255), Zipcode varCHAR(255), Latitude FLOAT, Longitdue FLOAT, type varCHAR(255))")
-	if err != nil {
-		panic(err.Error())
-	}
-	addPrimaryKey(db, "PrimaryKey")
-
-	//getConcentratesData(db, dispensaryIDs, ConcentratesDataSlice)
-	//getDispensaryData(db, entries, dispoDataSlice)
-
-	//getEdiblesData(db, dispensaryIDs, EdiblesDataSlice)
-
-	//getprerollsData(db, dispensaryIDs, prerollsDataSlice)
-
-	//getvapeorizersData(db, dispensaryIDs, vapeorizersDataSlice)
-
-	//getFlowerData(db, dispensaryIDs, flowerDataSlice)
+	getvapeorizersData(db, dispensaryIDs, vapeorizersDataSlice)
+	addvapeorizersPrimaryKey(db, "PrimaryKey")
 
 }

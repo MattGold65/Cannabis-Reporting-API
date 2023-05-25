@@ -44,10 +44,70 @@ func saveJsontoFile(filename string, target interface{}) {
 	}
 
 }
+func addDispoPrimaryKey(db *sql.DB, columnName string) error {
+	// Prepare the ALTER TABLE query
+	query := fmt.Sprintf("ALTER TABLE DispensaryCommon ADD COLUMN `%s` INT AUTO_INCREMENT PRIMARY KEY", columnName)
 
-func addPrimaryKey(db *sql.DB, columnName string) error {
+	// Execute the ALTER TABLE query
+	_, err := db.Exec(query)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+func addFlowerPrimaryKey(db *sql.DB, columnName string) error {
+	// Prepare the ALTER TABLE query
+	query := fmt.Sprintf("ALTER TABLE Product_flowerCommon ADD COLUMN `%s` INT AUTO_INCREMENT PRIMARY KEY", columnName)
+
+	// Execute the ALTER TABLE query
+	_, err := db.Exec(query)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+func addEdiblesPrimaryKey(db *sql.DB, columnName string) error {
 	// Prepare the ALTER TABLE query
 	query := fmt.Sprintf("ALTER TABLE Product_EdiblesCommon ADD COLUMN `%s` INT AUTO_INCREMENT PRIMARY KEY", columnName)
+
+	// Execute the ALTER TABLE query
+	_, err := db.Exec(query)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+func addConcentratesPrimaryKey(db *sql.DB, columnName string) error {
+	// Prepare the ALTER TABLE query
+	query := fmt.Sprintf("ALTER TABLE Product_ConcentratesCommon ADD COLUMN `%s` INT AUTO_INCREMENT PRIMARY KEY", columnName)
+
+	// Execute the ALTER TABLE query
+	_, err := db.Exec(query)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+func addprerollsPrimaryKey(db *sql.DB, columnName string) error {
+	// Prepare the ALTER TABLE query
+	query := fmt.Sprintf("ALTER TABLE Product_prerollsCommon ADD COLUMN `%s` INT AUTO_INCREMENT PRIMARY KEY", columnName)
+
+	// Execute the ALTER TABLE query
+	_, err := db.Exec(query)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func addvapeorizersPrimaryKey(db *sql.DB, columnName string) error {
+	// Prepare the ALTER TABLE query
+	query := fmt.Sprintf("ALTER TABLE Product_vapeorizersCommon ADD COLUMN `%s` INT AUTO_INCREMENT PRIMARY KEY", columnName)
 
 	// Execute the ALTER TABLE query
 	_, err := db.Exec(query)
