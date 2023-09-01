@@ -1,0 +1,1 @@
+This program meticulously gathers real-time information from a vast network of over a hundred Cannabis Dispensary menus across the entire state of Massachusetts. It then seamlessly integrates this invaluable data into a locally hosted MySQL database meticulously hosted within a Docker environment.
